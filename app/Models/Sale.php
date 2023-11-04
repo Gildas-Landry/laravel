@@ -13,4 +13,5 @@ class Sale extends Model
     }
 
     use HasFactory;
+    protected $fillable=['sellers_name','customer_name','customer_address'];
 }

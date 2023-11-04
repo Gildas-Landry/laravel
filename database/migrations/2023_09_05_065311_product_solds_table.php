@@ -16,12 +16,11 @@ return new class extends Migration
         Schema::create('product_solds',function(Blueprint $table){
             $table->id();
             $table->foreignIdFor(Product::class);
-            //$table->foreignId('product_id')->references('id')->on('products')->cascadeOnDelete();
             $table->foreignIdFor(Sale::class);
             $table->unsignedInteger('bulk_selling_price');
             $table->unsignedInteger('retail_selling_price');
             $table->unsignedInteger('quantity_sold');
-            $table->date('date_sold')->date_format('dd/mm/yyyy');
+            $table->date('date_sold');
             $table->timestamps();
         });
     }

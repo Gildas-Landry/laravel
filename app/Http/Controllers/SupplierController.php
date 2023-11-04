@@ -96,6 +96,6 @@ class SupplierController extends Controller
     {
         $supplier = Supplier::where('id',$id);
         $supplier->delete();
-        return "supplier not existing in db";
+        return response()->noContent();
     }
 }

@@ -13,13 +13,15 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): Response
+    public function store(LoginRequest $request)//:Response
     {
-        $request->authenticate();
+        if($request->authenticate()){
+            return true;
+        }
 
-        $request->session()->regenerate();
+        //$request->session()->regenerate();
 
-        return response('successfully logged in');
+        //return response("error incorrect username or password",400);
     }
 
     /**

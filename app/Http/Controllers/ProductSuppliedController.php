@@ -12,12 +12,17 @@ use Illuminate\Validation\Rules\Exists;
 class ProductSuppliedController extends Controller
 {
     public function allProductSupplied(){
-        $prosup= ProductSupplied::paginate(10);
+        $prosup= ProductSupplied::all();
         return response()->json($prosup);
     }
     public function delivery(Supplier $supplier, Product $product){
         if(Arr::Exists($product,'id')){
-            //$product->quantity
+           // $product->quantity
         }
+    }
+    public function destroy($id)
+    {
+        ProductSupplied::where('id', $id)->delete();
+        return response()->noContent();
     }
 }

@@ -22,7 +22,7 @@ class ProductFactory extends Factory
             'retail_quantity_stocked' => random_int(1,100),
             'cost_price' => random_int(1,100000),
             'selling_price' => random_int(1,100000),
-            'product_image' => fake()->image('public/image', 640, 480, null, false),
+            'product_image' => fake()->image('public/image',656,889,null, false),
             'category_id'=> random_int(1,5)
         ];
     }
