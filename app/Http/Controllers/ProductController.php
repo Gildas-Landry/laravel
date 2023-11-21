@@ -23,7 +23,7 @@ class ProductController extends Controller
         $validator = Validator::make($request->all(), [
             'product_name' => 'required|max:30',
             'cost_price' => 'required',
-            'product_image'=>'required',
+            'product_image'=>'required|file',
             "bulk_quantity_stocked" => 'required|integer',
             'retail_quantity_stocked' =>'required',
             "selling_price" => 'required',
@@ -34,9 +34,21 @@ class ProductController extends Controller
                 return response()->json(['translate' => ErrorManager::validate()], 400);
             }
 
+            // if ($file = $request->file('product_image')) {
+            //     $fileName = hexdec(uniqid()).'.'.$file->getClientOriginalExtension();
+            //     $path = 'public/image';
+
+            //     /**
+            //      * Upload an image to Storage
+            //      */
+            //     $file->storeAs($path, $fileName);
+            //     $validator['product_image']=$fileName;
+
+            // }
+
             $product = Product::create([
+                'product_image' => $request->product_image,
                 'product_name' => $request->product_name,
-                'product_image'=> $request->product_image,
                 'bulk_quantity_stocked' =>$request->bulk_quantity_stocked,
                 'retail_quantity_stocked' =>$request->retail_quantity_stocked,
                 'cost_price' => $request->cost_price,
@@ -44,7 +56,7 @@ class ProductController extends Controller
                 'category_id' => $request->category_id
             ]);
 
-            return response()->json($product);
+        return response()->json($product);
     }
 
     public function update(Request $request, $id)
@@ -119,5 +131,10 @@ class ProductController extends Controller
     public function exportCsv()
     {
         return Excel::download(new ProductExport, 'products.csv');
+    }
+
+    public function imageUpload(Request $request){
+        $request->validate(['image'=>'required|image|mimes:jpg,png,jgeg|max:2048']);
+
     }
 }

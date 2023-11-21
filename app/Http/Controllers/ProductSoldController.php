@@ -99,6 +99,7 @@ class ProductSoldController extends Controller
         $s=0;
         $productsupplied=ProductSupplied::all();
         $productsold=ProductSold::all();
+        
         foreach($productsold as $ps){
             foreach($productsupplied as $psu){
                 $profit= $ps->retail_selling_price-$psu->bulk_price;
